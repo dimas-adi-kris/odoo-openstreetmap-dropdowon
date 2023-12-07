@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_picking_incoming_form_view_inherited" model="ir.ui.view">
+        <field name="name">stock.picking.incoming.form.view.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                <field name="origin_id" attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'incoming')]}"
+                       options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

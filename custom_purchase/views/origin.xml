@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_move_origin_form_view" model="ir.ui.view">
+        <field name="name">stock.move.origin.form.view</field>
+        <field name="model">stock.move.origin</field>
+        <field name="arch" type="xml">
+            <form string="Origin">
+                <sheet>
+                    <group>
+                        <label for="name" string="Name"/>
+                        <div class="o_row">
+                            <field name="name" placeholder="Origin Name" widget="field_osm_autocomplete"/>
+                        </div>
+                        <label for="address" string="Address"/>
+                        <div class="o_row">
+                            <field name="address"/>
+                        </div>
+                    </group>
+                    <group>
+                        <group string="Geolocation">
+                            <label for="latitude" string="Geo Location"/>
+                            <div>
+                                <span>Lat :
+                                    <field name="latitude" nolabel="1" class="oe_inline"/>
+                                </span>
+                                <br/>
+                                <span>Long:
+                                    <field name="longitude" nolabel="1" class="oe_inline"/>
+                                </span>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_move_origin_tree_view" model="ir.ui.view">
+        <field name="name">stock.move.origin.tree.view</field>
+        <field name="model">stock.move.origin</field>
+        <field name="arch" type="xml">
+            <tree string="Origin">
+                <field name="name"/>
+                <field name="address"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_open_stock_move_origin_view">
+        <field name="name">Origin</field>
+        <field name="res_model">stock.move.origin</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smilling_face">
+                No data show, Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Origin" id="menu_stock_move_origin" parent="stock.menu_stock_config_settings"
+              action="action_open_stock_move_origin_view"/>
+
+</odoo>

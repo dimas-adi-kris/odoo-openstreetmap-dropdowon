@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <record id="view_purchase_analyse_report_tree" model="ir.ui.view">
+        <field name="name">view.purchase.analyse.report.tree</field>
+        <field name="model">purchase.analyse.report</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Analysis" create="false">
+                <field name="currency_id" invisible="1"/>
+                <field name="receipt_date"/>
+                <field name="picking_name"/>
+                <field name="product_id"/>
+                <field name="product_uom"/>
+                <field name="product_uom_qty" sum="product_uom_qty"/>
+                <field name="qty_received" sum="qty_received"/>
+                <field name="qty_invoice" sum="qty_invoice"/>
+                <field name="difference_percentage" widget="percentage" string="Rendement" avg="difference_percentage"/>
+                <field name="price_unit" widget="monetary" string="Unit Price"/>
+                <field name="unit_received_price" widget="monetary" sum="unit_received_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_analyse_report_graph" model="ir.ui.view">
+        <field name="name">view.purchase.analyse.report.graph</field>
+        <field name="model">purchase.analyse.report</field>
+        <field name="arch" type="xml">
+            <graph string="Purchase Analysis" type="line">
+                <field name="product_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="receipt_date"/>
+                <field name="qty_received" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_purchase_analyse_report_pivot" model="ir.ui.view">
+        <field name="name">view.purchase.analyse.report.pivot</field>
+        <field name="model">purchase.analyse.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Purchase Analysis">
+                <field name="product_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="receipt_date" type="row"/>
+                <field name="product_uom_qty" type="measure"/>
+                <field name="qty_received" type="measure"/>
+                <field name="difference" type="measure"/>
+                <field name="price_unit" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_purchase_analyse_report_search" model="ir.ui.view">
+        <field name="name">view.purchase.analyse.report.search</field>
+        <field name="model">purchase.analyse.report</field>
+        <field name="arch" type="xml">
+            <search string="Purchase Analysis">
+                <field name="product_id"/>
+                <field name="partner_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="product_id" context="{'group_by':'product_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_purchase_analyse_report_view" model="ir.actions.act_window">
+        <field name="name">Purchase Analysis</field>
+        <field name="res_model">purchase.analyse.report</field>
+        <field name="view_mode">tree,graph,pivot</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data show!
+            </p>
+        </field>
+    </record>
+</odoo>
